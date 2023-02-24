@@ -661,6 +661,9 @@ namespace ST.Library.UI.NodeEditor
             this.OnDrawConnectedLine(m_drawing_tools);
             this.OnDrawNode(m_drawing_tools, this.ControlToCanvas(this.ClientRectangle));
 
+            //2023-2-10增加刻度
+            this.DrawRule(g);
+
             if (m_ca == CanvasAction.ConnectOption) {                       //如果正在连线
                 m_drawing_tools.Pen.Color = this._HighLineColor;
                 g.SmoothingMode = SmoothingMode.HighQuality;
@@ -2105,5 +2108,52 @@ namespace ST.Library.UI.NodeEditor
         }
 
         #endregion public
+
+        #region Custom
+        /// <summary>
+        /// 画标尺
+        /// </summary>
+        /// <param name="g"></param>
+        private void DrawRule(Graphics g)
+        {
+            Color color = Color.FromArgb(220, 220, 220);
+            int _padding = 20;
+            float xMin = -(this._CanvasOffsetX / this._CanvasScale) + _padding / this._CanvasScale;
+            float xMax = ((this.Width - this._CanvasOffsetX) / this._CanvasScale);
+            float yMin = -(this._CanvasOffsetY / this._CanvasScale) + _padding / this._CanvasScale;
+            float yMax = ((this.Height - this._CanvasOffsetY) / this._CanvasScale);
+
+            g.FillRectangle(new SolidBrush(Color.FromArgb(18, 18, 18)), xMin - _padding / this._CanvasScale, yMin - _padding / this._CanvasScale,
+                xMax - xMin + _padding / this._CanvasScale, _padding / this._CanvasScale);
+
+            g.FillRectangle(new SolidBrush(Color.FromArgb(18, 18, 18)), xMin - _padding / this._CanvasScale, yMin, _padding / this._CanvasScale, yMax - yMin);
+
+            g.DrawLine(new Pen(color),new PointF(xMin, yMin),
+                new PointF(xMax, yMin));
+
+            g.DrawLine(new Pen(color), new PointF(xMin, yMin),
+                new PointF(xMin, yMax));
+
+            Font font = new Font("微软雅黑", 8 / this._CanvasScale);
+            SizeF textSize = g.MeasureString(xMax.ToString("F0"), font);
+            //X
+            g.DrawString(xMin.ToString("F0"), font, new SolidBrush(color),
+                new PointF(xMin, yMin - _padding / this._CanvasScale));
+            g.DrawString(xMax.ToString("F0"), font, new SolidBrush(color),
+                new PointF(xMax - textSize.Width, yMin - _padding / this._CanvasScale));
+
+            //Y
+            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
+            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+            textSize = g.MeasureString(yMax.ToString("F0"), font);
+            g.DrawString(yMin.ToString("F0"), font, new SolidBrush(color),
+                new PointF(xMin - _padding / this._CanvasScale, yMin), drawFormat);
+            g.DrawString(yMax.ToString("F0"), font, new SolidBrush(color),
+                new PointF(xMin - _padding / this._CanvasScale,yMax - textSize.Width), drawFormat);
+
+           // Console.WriteLine(this.m_pt_in_canvas);
+            //Console.WriteLine(this.Width / this._CanvasScale);
+        }
+        #endregion Custom
     }
 }

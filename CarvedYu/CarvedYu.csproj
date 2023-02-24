@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DSkin">
+      <HintPath>..\..\..\sdk\【4.0】DSkin20220323105011\DSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="DSkin.Design">
+      <HintPath>..\..\..\sdk\【4.0】DSkin20220323105011\DSkin.Design.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataManager\CYData.cs" />
+    <Compile Include="DataManager\CYDataSetManager.cs" />
+    <Compile Include="DataManager\CYDeepLearningModule.cs" />
+    <Compile Include="DataManager\CYInputModule.cs" />
+    <Compile Include="DataManager\CYModule.cs" />
+    <Compile Include="DataManager\CYModuleManager.cs" />
+    <Compile Include="DataManager\CYProjectManager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +67,32 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Ex\ToolStripRendererEx.cs" />
+    <Compile Include="UI\MainForm\WorkFlowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\MainForm\WorkFlowControl.Designer.cs">
+      <DependentUpon>WorkFlowControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProjectManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ProjectManagerForm.Designer.cs">
+      <DependentUpon>ProjectManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PropertyControl\CYPropertyDescriptor.cs" />
+    <Compile Include="UI\PropertyControl\STNodeCheckBox.cs" />
+    <Compile Include="UI\PropertyControl\STNodeColorButton.cs" />
+    <Compile Include="UI\TemplateControl\ProjectTemplate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\WorkFlowNode\CYNodeBase.cs" />
+    <Compile Include="UI\WorkFlowNode\DeepLearningDetNode.cs" />
+    <Compile Include="UI\WorkFlowNode\DeepLearningSemNode.cs" />
+    <Compile Include="UI\WorkFlowNode\InputImageNode.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +102,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\MainForm\WorkFlowControl.resx">
+      <DependentUpon>WorkFlowControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ProjectManagerForm.resx">
+      <DependentUpon>ProjectManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TemplateControl\ProjectTemplate.resx">
+      <DependentUpon>ProjectTemplate.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -76,5 +124,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ST.Library.UI\ST.Library.UI.csproj">
+      <Project>{effcc270-4999-4077-a543-56cccce92147}</Project>
+      <Name>ST.Library.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

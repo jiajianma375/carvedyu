@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarvedYu.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace CarvedYu
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //Application.Run(new ProjectManagerForm());
             Application.Run(new Form1());
         }
     }
